@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\StaticPagesController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Cms\ArticlesController;
+use App\Http\Controllers\Cms\CategoriesController;
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CategoriesController as CategoriesViewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('static.index');
 });
 
 Route::get('/contacts', [StaticPagesController::class, 'contacts'])->name('contacts');
+Route::get('/about', [StaticPagesController::class, 'about'])->name('about');
+
+Route::get('/tasks', [TasksController::class, 'index']);
+Route::get('/users', [UsersController::class, 'index']);
+Route::get('/categories', [CategoriesViewController::class, 'index']);
+
+Route::resource('/admin/articles', ArticlesController::class);
+
+Route::resource('/admin/categories', CategoriesController::class);

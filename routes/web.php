@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\StaticPagesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Cms\ArticlesController;
-use App\Http\Controllers\Cms\CategoriesController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\CategoriesController as CategoriesViewController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Cms\CategoriesController as CmsCategoriesController;
+use App\Http\Controllers\Cms\TasksController as CmsTasksController;
+use App\Http\Controllers\Cms\UsersController as CmsUsersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,8 +29,9 @@ Route::get('/about', [StaticPagesController::class, 'about'])->name('about');
 
 Route::get('/tasks', [TasksController::class, 'index']);
 Route::get('/users', [UsersController::class, 'index']);
-Route::get('/categories', [CategoriesViewController::class, 'index']);
+Route::get('/categories', [CategoriesController::class, 'index']);
 
-Route::resource('/admin/articles', ArticlesController::class);
 
-Route::resource('/admin/categories', CategoriesController::class);
+Route::resource('/admin/categories', CmsCategoriesController::class);
+Route::resource('/admin/tasks', CmsTasksController::class);
+Route::resource('/admin/users', CmsUsersController::class);

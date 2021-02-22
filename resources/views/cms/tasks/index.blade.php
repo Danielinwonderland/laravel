@@ -5,11 +5,11 @@
 @section('content')
     <div class="row mb-3 mt-n5">
         <div class="col col-sm-12">
-            <a href="{!! route('categories.create') !!}" class="btn btn-info float-right"><i class="fas fa-plus"></i> добавить категорию</a>
+            <a href="{!! route('tasks.create') !!}" class="btn btn-info float-right"><i class="fas fa-plus"></i> добавить категорию</a>
         </div>
     </div>
 
-    @if($categories->count() === 0)
+    @if($tasks->count() === 0)
     <div class="alert alert-info">
         <i class="icon fas fa-info"></i> Категорий нет!
     </div>
@@ -21,22 +21,33 @@
                 <tr>
                     <th style="width: 10px">ID</th>
                     <th>Название</th>
-                    <th>Сортировка</th>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                    <th>Заказчик</th>
+                    <th>Исполнитель</th>
+                    <th>Категория</th>
+                    <th>Статус</th>
                     <th style="width: 230px"></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($categories as $category)
+                @foreach ($tasks as $task)
                 <tr>
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td>{{ $task->id }}</td>
+                    <td>{{ $task->head }}</td>
+                    <td>{{ $task->descn }}</td>
+                    <td>{{ $task->price }}</td>
+                    <td>{{ $task->customer }}</td>
+                    <td>{{ $task->executor }}</td>
+                    <td>{{ $task->category }}</td>
+                    <td>{{ $task->status }}</td>
                     <td class="text-right">
-                        <form method="post" action="{!! route('categories.destroy', [$category->id]) !!}">
+                        <form method="post" action="{!! route('tasks.destroy', [$task->id]) !!}">
                             {!! csrf_field() !!}
                             {!! method_field('DELETE') !!}
-                            <button class="btn btn-xs btn-danger float-right delete-btn" type="submit" data-toggle="modal" data-target="#modal-delete-item" data-message="Удалить категорию <b>{{ $category->name }}</b> [{{ $category->id }}]?"><i class="fas fa-trash"></i> удалить</button>
+                            <button class="btn btn-xs btn-danger float-right delete-btn" type="submit" data-toggle="modal" data-target="#modal-delete-item" data-message="Удалить категорию <b>{{ $task->head }}</b> [{{ $task->id }}]?"><i class="fas fa-trash"></i> удалить</button>
                         </form>
-                        <a class="btn btn-default btn-xs float-right mr-2" href="{!! route('categories.edit', [$category->id]) !!}"><i class="fas fa-pencil-alt"></i> редактировать</a>
+                        <a class="btn btn-default btn-xs float-right mr-2" href="{!! route('tasks.edit', [$task->id]) !!}"><i class="fas fa-pencil-alt"></i> редактировать</a>
                     </td>
                 </tr>
                 @endforeach
